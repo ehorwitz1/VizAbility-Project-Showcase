@@ -6,10 +6,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class TextHandler : MonoBehaviour
 {
+    //Holds all of the text elements that will be changed
     public List<TextMeshProUGUI> guiList;
 
+    //Reference to active button
     ButtonClass activeButton;
 
+    //This loads an image from the web
     public ImageLoader loadImage;
 
     public TextMeshProUGUI scrollText;
@@ -24,6 +27,7 @@ public class TextHandler : MonoBehaviour
         {
             guiList.Add(child.GetComponent<TextMeshProUGUI>());
         }
+        //Kept having a hard time setting the scrollbar value
         scrollRect.verticalScrollbar.value = 1f;
     }
 
@@ -33,11 +37,14 @@ public class TextHandler : MonoBehaviour
 
     }
 
+    //This gets called when the buttons are clicked on. It sets the text equal to whats in the button
     public void SetActiveButton(ButtonClass buttonInfo)
     {
+        //Get the buttonInfo from the active button
         activeButton = buttonInfo;
+
+        //Go through all the text elements 
         setAllText();
-        //loadImage.gameObject.SetActive(false);
     }
 
     public void setAllText()
@@ -48,7 +55,6 @@ public class TextHandler : MonoBehaviour
         //Set the details
         guiList[1].SetText(activeButton.Details);
         scrollText.SetText(activeButton.Details);
-        Debug.Log(scrollText.text.Split('\n').Length);
         scrollRect.verticalScrollbar.value = 1f;
 
 
@@ -63,7 +69,7 @@ public class TextHandler : MonoBehaviour
         //Set the collaborator
         guiList[4].SetText("Client:\n" + activeButton.Client);
 
-
+        //Check to see if we need to show an image or not
         if(activeButton.ImageLocation.CompareTo("") == 0)
         {
             Debug.Log("No URL GIVEN");
@@ -84,7 +90,7 @@ public class TextHandler : MonoBehaviour
 
 
 
-
+    //This is pretty much equivalent to the JsonClass. This class and the JsonClass could be combined to make things easier
     [System.Serializable]
     public class textHolder
     {

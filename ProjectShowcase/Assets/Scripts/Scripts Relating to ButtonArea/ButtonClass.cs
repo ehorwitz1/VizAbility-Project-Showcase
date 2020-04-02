@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ButtonClass: MonoBehaviour
 {
+    //The button holds info thats very similar to the Json Class, the textHandler gets this info when a button is clicked on
     public string Title;
     public string Tools;
     public string Developer;
@@ -11,16 +12,7 @@ public class ButtonClass: MonoBehaviour
     public string Client;
     public string ImageLocation;
     public string ButtonTitle;
-    /*
-    public ButtonClass()
-    {
-        Category = "";
-        Title = "";
-        Tools = "";
-        Developer = "";
-        Collaborator = "";
-        Details = "";
-    }*/
+
 
     public void setText(string title, string tools, string developer, string details, string client, string imageLoc, string bTitle)
     {

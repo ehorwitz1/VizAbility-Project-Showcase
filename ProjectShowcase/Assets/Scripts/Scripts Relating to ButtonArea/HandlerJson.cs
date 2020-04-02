@@ -8,6 +8,7 @@ public class HandlerJson : MonoBehaviour
     public string jsonFilePath = "/Resources/JsonData/Sheet1.txt";
     public JsonCollection jCollection;
 
+    //Each Json element gets read into one of these classes, it matches the order of the columns of the spreadsheet
     [System.Serializable]
     public class JsonClass
     {
@@ -62,37 +63,12 @@ public class HandlerJson : MonoBehaviour
 
     }
 
-    void LoadJson()
-    {
-        //Get the filepath
-        string filePath = Application.dataPath + jsonFilePath;
 
-        Debug.Log(filePath);
-
-        if (File.Exists(filePath))
-        {
-            //Read all the Json data into a single string, Unity takes care of the rest
-            string dataAsJson = File.ReadAllText(filePath);
-
-            //Just to show what is in the string
-            //Debug.Log(dataAsJson);
-
-            dataAsJson = "{\"objectList\" : \n" + dataAsJson + "}";
-
-            //Given all of the Json data parse it into our list of objects
-            ParseJsonToObject(dataAsJson);
-
-        }
-        else
-        {
-            Debug.Log("File not found");
-        }
-    }
 
     void LoadAndroidJson()
     {
         //Get the filepath
-        LoadStreamingJsonAnother();
+        GetDataPath();
 
         Debug.Log(dbPath);
 
@@ -101,9 +77,7 @@ public class HandlerJson : MonoBehaviour
             //Read all the Json data into a single string, Unity takes care of the rest
             string dataAsJson = File.ReadAllText(dbPath);
 
-            //Just to show what is in the string
-            //Debug.Log(dataAsJson);
-
+            //This concatination was required in order to get a list of Json Objects
             dataAsJson = "{\"objectList\" : \n" + dataAsJson + "}";
 
             //Given all of the Json data parse it into our list of objects
@@ -116,11 +90,11 @@ public class HandlerJson : MonoBehaviour
         }
     }
 
+
     string dbPath = "";
-    void LoadStreamingJsonAnother()
+    void GetDataPath()
     {
-        // Android
-        //string oriPath = System.IO.Path.Combine(Application.streamingAssetsPath, "db.bytes");
+        // Works for both pc and android data paths
         string oriPath = System.IO.Path.Combine(Application.streamingAssetsPath, "Json.txt");
 
         // Android only use WWW to read file

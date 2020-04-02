@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script did not end up being used
 public class ButtonController : MonoBehaviour
 {
     public List<RectTransform> childRect;
